@@ -53,4 +53,8 @@ deploy-job: # This job runs in the deploy stage.
   stage: deploy # It only runs when *both* jobs in the test stage complete successfully.
   environment: production
   script:
+    - chmod +x ./deploy.sh # let deploy.sh file executable
+    # 因為 deploy.sh 建立時的身份是 ubuntu,
+    # 但 gitlab_runner 在跑時，他的身份不是 ubuntu, 而是 gitlab_runner
+    # 所以如果不調整 ./deploy.sh 的權限的話，就會碰到 permission denied 的 error
     - ./deploy.sh # run current directory bash file
