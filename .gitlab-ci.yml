@@ -22,8 +22,11 @@ stages: # List of stages for jobs, and their order of execution
   - deploy
 
 build-job: # This job runs in the build stage, which runs first.
+  variables:
+    my_name: "hahahahaha"
   stage: build
   script:
+    - echo "Hello! my name is $my_name"
     - echo "Compiling the code..."
     - echo "Compile complete."
 
